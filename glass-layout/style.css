@@ -21,7 +21,7 @@ body{
     justify-content: center;
     align-items: center;
     overflow: hidden;
-}
+    font-family: 'Ubuntu', sans-serif;}
 
 .container{
     background-color: var(--black);
@@ -35,6 +35,8 @@ body{
     -webkit-backdrop-filter: blur(2px);
     /* display: flex;
     flex-wrap: wrap; */
+    min-height: 340px;
+    min-width: 890px;
 }
 
 .main-img-plane{
@@ -56,19 +58,10 @@ body{
     animation: rotation  30s linear infinite;
 }
 
-.main-img-bug{
+/* .main-img-bug{
     position: absolute;
     width: 30vw;
     right: 0;
-}
-
-/* .icons{
-    display: flex;
-}
-
-.icons img{
-    justify-content: end;
-    height: 50px;
 } */
 
   @keyframes animationFrames{
@@ -100,22 +93,30 @@ body{
 
   nav ul li.name{
       flex: 1;
-      font-size: 25px;
-      font-weight: 600;
-      letter-spacing: 7px;
+      font-size: 20px;
+      /* font-weight: 600; */
+      letter-spacing: 5px;
       color: white;
-      padding-left: 5vw;
+      /* padding-left: 5vw; */
   }
 
   nav ul div.items{
       display: inline-flex;
+      padding-left: 50px;
   }
 
   nav ul div.items a{
       text-decoration: none;
       font-size: 18px;
-      padding: 10px;
+      padding: 10px 20px;
       color: white;
+      /* font-weight: 600; */
+  }
+
+  nav ul div.items a:hover{
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
   main{
@@ -146,32 +147,46 @@ body{
   .welcome{
       grid-area: welcome;
       padding-top: 7vh;
+      font-size: 25px;
+      padding-left: 3vw;
   }
 
   .japan{
       grid-area: japan;
-      font-weight: 600;
-      font-size: 25px;
+      /* font-weight: 600; */
+      font-size: 43px;
+      font-family: 'Concert One', cursive;
+      letter-spacing: 6px;
+      padding-left: 10vw;
+      font-style: italic;
+      line-height: 40px;
   }
 
   .description{
       grid-area: description;
+      line-height: 25px;
+      word-spacing: 6px;
   }
 
   .btn{
-      grid-area: btn;
-      justify-self: center;
-      align-self: center;
-      padding: 5px 20px;
-      background-color: rgba(0, 0, 0, 0.322);
-      color: white;
+    grid-area: btn;
+    justify-self: center;
+    align-self: center;
+    padding: 5px 20px;
+    background-color: rgba(0, 0, 0, 0.322);
+    color: white;
     border-radius: 4px;
     font-weight: 600;
     word-spacing: 8px;
   }
 
+  .btn:hover{
+    padding: 8px 22px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
   .torii{
-      width: 20vw;
+      width: 17vw;
       grid-area: image;
       align-self: center;
       justify-self: center;
