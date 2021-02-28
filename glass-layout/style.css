@@ -33,8 +33,6 @@ body{
     position: relative;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    /* display: flex;
-    flex-wrap: wrap; */
     min-height: 340px;
     min-width: 890px;
 }
