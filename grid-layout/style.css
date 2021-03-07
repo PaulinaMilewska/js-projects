@@ -9,7 +9,7 @@
     display: grid;
     height: 100vh;
     grid-template-columns: 1fr 12fr 1fr;
-    grid-template-rows: 16vh 16vh 16vh 16vh 16vh 16vh;
+    grid-template-rows: 16vh 16vh 16vh 16vh 16vh 14vh;
     grid-template-areas: 
     "left-img-1 main right-img-1"
     "left-img-2 main right-img-1"
@@ -39,7 +39,7 @@ main{
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 14vh 7vh 40vh 25vh 10vh;
+    grid-template-rows: 14vh 7vh 40vh 25vh 9vh;
     grid-template-areas: 
     "logo header-img-1 header-img-1 header-img-2 header-img-3"
     "nav nav nav nav nav"
