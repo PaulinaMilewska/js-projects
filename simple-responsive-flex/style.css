@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+}
+body {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 0.875em;
+    line-height: 1.6em;
+}
+
+header {
+    background-image: url("img/dog-3.jpg");
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5%;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: white;
+}
+
+article {
+    padding: 10px;
+}
+
+nav ul { 
+    list-style-type: none;
+    list-style-position: inside;
+    margin: 0;
+    padding: 10px; 
+}
+
+nav li{
+    padding: 5px;
+    margin-top: 10px;
+    background-color: lightskyblue;
+    border-radius: 4px;
+    color: black;
+}
+
+nav h2{
+    padding: 10px 0px 0px 10px;
+}
+
+aside img {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+footer p {
+    text-align: center;
+}

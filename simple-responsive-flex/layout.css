@@ -1,0 +1,42 @@
+main {
+    display: flex;
+}
+main aside {
+    min-width: 40%;
+} 
+
+@media screen and (max-width: 720px) {
+    header {
+        height: 200px;        
+    }
+    header h1 {
+        font-size: 1rem;
+    }
+
+    aside {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    aside div {
+        flex-basis: 50%;
+    }
+   
+    main {
+        flex-wrap: wrap;
+    }
+    main article {
+        order: 1;
+    }
+    main nav {
+        order: 3;
+    }
+    main aside {
+        order: 2;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    aside div {
+        flex-basis: 100%;
+    }
+}
