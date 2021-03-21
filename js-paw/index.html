@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="header">
+        <ul>
+            <li class="logo"> <img src="images/paws.svg" alt=""></li>
+            <li>
+                <p class="title">pawtinder</p>
+            </li>
+        </ul>
+    </header>
+    <div class="container">
+        <section class="search">
+            <div class="search__title">Znajdź najlepsze dopasowanie</div>
+            <div class="search__male">
+                <p>Płeć</p>
+                <ul class="search__ul">
+                    <li id="piesek" class="piesek" data-sex="piesek" class="active">
+                        <img src="images/paw.svg" alt="">
+                        <p>Pan Piesek</p>
+                    </li>
+                    <li id="suczka" class="suczka" data-sex="suczka">
+                        <img src="images/paw.svg" alt="">
+                        <p>Pani Pieskowa</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="search__stars">
+                <p>Ilość gwiazdek</p>
+                <ul>
+                    <li id="one" class="one">
+                        <p>1</p>
+                        <img src="images/star.svg" alt="">
+                    </li>
+                    <li id="two" class="two">
+                        <p>2</p>
+                        <img src="images/star.svg" alt="">
+                    </li>
+                    <li id="three" class="three">
+                        <p>3</p>
+                        <img src="images/star.svg" alt="">
+                    </li>
+                    <li id="four" class="four">
+                        <p>4</p>
+                        <img src="images/star.svg" alt="">
+                    </li>
+                    <li id="five" class="five">
+                        <p>5</p>
+                        <img src="images/star.svg" alt="">
+                    </li>
+                </ul>
+            </div>
+            <section class="range-slider">
+                <span>Wiek:</span>
+                <span class="rangeValues"></span>
+                <input value="3" min="1" max="12" step="1" type="range">
+                <input value="8" min="1" max="12" step="1" type="range">
+            </section>
+        </section>
+        <section class="gallery">
+            <div id="box" class="box"></div>
+        </section>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
