@@ -23,7 +23,7 @@ body{
     overflow: hidden;
     font-family: 'Ubuntu', sans-serif;}
 
-.container{
+.container{ 
     background-color: var(--black);
     width: 80%;
     height: 70%;
