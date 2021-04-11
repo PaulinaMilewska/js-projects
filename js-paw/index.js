@@ -25,6 +25,8 @@ let fetchDogs = (event) => {
 		});
 };
 
+
+
 const renderDogs = (dogs) => {
 	const html = dogs
 		.map((dog) => {
@@ -52,6 +54,34 @@ fetchDogs()
 	.then(() => {
 		renderDogs(dogs);
 	});
+
+
+	// filters
+
+	const filters = {
+		sex: {
+			all: () => true,
+			male: (dogs) => dogs.sex === "piesek",
+			female: (dogs) => dogs.sex === "suczka"
+		  },
+		  stars: {
+			all: () => true,
+			one: (dogs) => dogs.stars == "1",
+			two: (dogs) => dogs.stars == "2",
+			three: (dogs) => dogs.stars == "3",
+			four: (dogs) => dogs.stars == "4",
+			five: (dogs) => dogs.stars == "5"
+		  },
+		//   age: {
+	
+		//   }
+	};
+	
+	let activeFilters = [];
+	
+
+
+
 
 const maleFilter = () => {
 	const male = document.querySelector('#piesek');
@@ -118,10 +148,95 @@ maleFilter();
 starFilter();
 ageFilter();
 
+// const filters = {
+// 	sex: {
+// 		all: () => true,
+// 		male: (dogs) => dogs.sex === "male",
+// 		female: (dogs) => dogs.sex === "female"
+// 	  },
+// 	  stars: {
+// 		all: () => true,
+// 		one: (dogs) => dogs.stars === "1",
+// 		two: (dogs) => dogs.stars === "2",
+// 		three: (dogs) => dogs.stars === "3",
+// 		four: (dogs) => dogs.stars === "4",
+// 		five: (dogs) => dogs.stars === "5"
+// 	  },
+// 	//   age: {
 
+// 	//   }
+// };
 
-// const mainFilter = () => {
-//   maleFilter && starFilter && ageFilter
-// }
+// let activeFilters = [];
 
-// mainFilter();
+  
+//   const makeSelect = (id, textLabel, options) => {
+// 	const field = document.createElement("span")
+// 	const label = document.createElement("label")
+// 	const select = document.createElement("select");
+// 	const defaultOptions = [{ value: 'all', label: "" }];
+	
+// 	label.textContent = textLabel;
+	
+// 	label.setAttribute('for', id);
+// 	select.setAttribute('id', id);
+	
+// 	defaultOptions.concat(options).forEach((option) => {
+// 	  const node = document.createElement("option");
+// 	  node.setAttribute("value", `${id}:${option.value}`);
+// 	  node.textContent = option.label;
+// 	  select.appendChild(node);
+// 	});
+	
+// 	select.addEventListener("change", (event) => {
+// 	  const prefix = id;
+	  
+// 	  activeFilters = activeFilters.filter(name => name.indexOf(`${id}:`) !== 0);
+	  
+// 	  const value = event.target.value
+	  
+// 	  if (value.includes(':') === false) {
+// 		return;
+// 	  }
+	  
+// 	  activeFilters = activeFilters.concat(value)
+	  
+// 	  const filteringFunctions = activeFilters.map(filterId => {
+// 		const [prefix, name] = filterId.split(':')
+// 		const filteringFunction = filters[prefix][name]
+// 		return filteringFunction;
+// 	  })
+	  
+// 	  const dogsToDisplay = people.filter(dog => filteringFunctions.every(f => f(dog)))
+	  
+// 	  renderDogs(dogsToDisplay)
+// 	});
+	
+// 	field.appendChild(label);
+// 	field.appendChild(select);
+	
+// 	return field;
+//   };
+  
+//   const sexSelect = makeSelect("sex", "Sex", [
+// 	{ value: "piesek", label: "Male" },
+// 	{ value: "suczka", label: "Female" }
+//   ]);
+  
+//   const starSelect = makeSelect("city", "City", [
+// 	{ value: "one", label: "One" },
+// 	{ value: "two", label: "Two" },
+// 	{ value: "three", label: "Three" },
+// 	{ value: "four", label: "Four" },
+// 	{ value: "five", label: "Five" }
+//   ]);
+  
+  
+//   box.append(sexSelect);
+//   box.append(starSelect);
+//   document.body.append(container);
+  
+//   renderDogs(dogs);
+  
+
+  

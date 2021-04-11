@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <title>Flashcards</title>
+</head>
+
+<body>
+    <div class="main">
+        <nav class="navigation">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Me</a></li>
+                <li><a href="#">HTML</a></li>
+                <li><a href="#">CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+                <li><a href="#">React</a></li>
+                <li class="user"><a href="#"><i class="fas fa-user"></i></a></li>
+                <li class="user"><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                <li class="user"><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="scene scene--card">
+            <div class="card">
+                <div class="card__face card__face--front">front</div>
+                <div class="card__face card__face--back">back</div>
+            </div>
+        </div>
+        <button type="submit" class="arrow right"></button>
+        <button class="arrow left"></button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
