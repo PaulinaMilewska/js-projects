@@ -48,6 +48,10 @@ a:hover {
    flex: 1;
 }
 
+.clicked {
+   background-color: rgb(161, 105, 0);
+}
+
 @media all and (max-width: 1000px) {
    .navigation ul {
       flex-wrap: wrap;

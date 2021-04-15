@@ -47,7 +47,49 @@ const dataHTML = [
     {
         "How do you insert a copyright symbol on a browser page?" : "To insert the copyright symbol, you need to type &copy; or & #169; in an HTML file"
     }
-]
+];
+
+const dataJS = [
+    {
+        "Which company developed JavaScript?" : "Netscape is the software company that developed JavaScript"
+    },
+    {
+        "What is a prompt box?" : "A prompt box is a box that allows the user to enter input by providing a text box. A label and box will be provided to enter the text or number"
+    },
+    {
+        "What is 'this' keyword in JavaScript?" : "'This' keyword refers to the object from where it was called"
+    },
+    {
+        "Does JavaScript support automatic type conversion?" : "Yes, JavaScript does support automatic type conversion. It is the common way of type conversion used by JavaScript developers"
+    },
+    {
+        "What is called Variable typing in Javascript?" : "Variable typing is used to assign a number to a variable. The same variable can be assigned to a string"
+    },
+    {
+        "What would be the result of 3+2+\"7\"?" : "Since 3 and 2 are integers, they will be added numerically. And since 7 is a string, its concatenation will be done. So the result would be 57"
+    }
+];
+
+const dataREACT = [
+    {
+        "What is Reactjs?" : "React is a JavaScript library that makes building user interfaces easy. It was developed by Facebook"
+    },
+    {
+        "What is Flux Concept In React?" : "Facebook widely uses flux architecture concept for developing client-side web applications. It is not a framework or a library. It is simply a new kind of architecture that complements React and the concept of Unidirectional Data Flow"
+    },
+    {
+        "What is an action in Redux?" : "It is a function which returns an action object. The action-type and the action data are always stored in the action object. Actions can send data between the Store and the software application. All information retrieved by the Store is produced by the actions"
+    },
+    {
+        "Explain the term stateless components" : "Stateless components are pure functions that render DOM-based solely on the properties provided to them"
+    },
+    {
+        "Explain the term high order component" : "A higher-order component also shortly known as HOC is an advanced technique for reusing component logic. It is not a part of the React API, but they are a pattern which emerges from React’s compositional nature"
+    },
+    {
+        "What are Props in react js?" : "Props mean properties, which is a way of passing data from parent to child. We can say that props are just a  communication channel between components. It is always moving from parent to child component"
+    }
+];
 
 let i = 0;
 function addData(data, category){
@@ -64,14 +106,14 @@ function addData(data, category){
 
 // addData(dataCSS, "css");
 // addData(dataHTML, "html");
+// addData(dataJS, "js");
+// addData(dataREACT, "react");
 
 const question = document.querySelector(".card__face--front");
 const answer = document.querySelector(".card__face--back");
 
 
-let getQuestion = (category, dataArray) =>
-// function getQuestion()
-{
+let getQuestion = (category) =>{
     console.log(category);
     return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`)
     .then(res => res.json())
@@ -82,8 +124,7 @@ let getQuestion = (category, dataArray) =>
         console.log('err', err.message);
     });
 }
-// const question = document.querySelector(".card__face--front");
-// getQuestion();
+
 const renderCard = (cards) => {
     let htmlQuestion = "";
     let htmlAnswer = "";
@@ -105,13 +146,12 @@ let cssCards = [];
 
 const showCardsByCategory = (category) => getQuestion(category)
 .then( (cardsFromApi) => {
-    // dataArray = cssCards;
     cssCards = cardsFromApi;
     console.log("array", cssCards);
 })
 .then(() => {
     renderCard(cssCards);
-    console.log("cssCards", cssCards);
+    // console.log("cssCards", cssCards);
 })
 .then(() => {
     let index = 0;
@@ -120,8 +160,7 @@ const showCardsByCategory = (category) => getQuestion(category)
     let nextIndex = renderCard(cssCards) + 1;
     // console.log("nextIndex", nextIndex);
     rightBtn.addEventListener("click", () => {
-        console.log("Next", cssCards);
-        console.log("nnneeexxxttt", nextIndex);
+        // console.log("Next", cssCards);
         let htmlQuestion = "";
         let htmlAnswer = "";
         const tab = [];
@@ -136,22 +175,52 @@ const showCardsByCategory = (category) => getQuestion(category)
                 answer.innerText = htmlAnswer;
             }
             tab.push(index);
-            console.log("index",value.index);
-            console.log("nextIndex", nextIndex);
-            console.log(tab);
+            // console.log("index",value.index);
+            // console.log("nextIndex", nextIndex);
+            // console.log(tab);
         }
         nextIndex++;
         let max = Math.max(...tab);
-        console.log("max", max);
+        // console.log("max", max);
+        // looping
         if(nextIndex> max) nextIndex = 1;
     })
 });
 
 const html = document.querySelector(".html");
+const htmlLink = document.querySelector(".html a");
 const css = document.querySelector(".css");
+const cssLink = document.querySelector(".css a");
 const js = document.querySelector(".js");
+const jsLink = document.querySelector(".js a");
 const react = document.querySelector(".react");
-html.addEventListener('click', () => showCardsByCategory("html"));
-css.addEventListener('click', () => showCardsByCategory("css"));
-js.addEventListener('click', () => showCardsByCategory("js"));
-react.addEventListener('click', () => showCardsByCategory("react"));
+const reactLink = document.querySelector(".react a");
+const links = document.querySelectorAll(".navigation ul li a");
+html.addEventListener('click', () => {
+    links.forEach((el) => {
+        el.classList.remove("clicked");
+      });
+    htmlLink.classList.add("clicked");
+    showCardsByCategory("html");
+});
+css.addEventListener('click', () => {
+    links.forEach((el) => {
+        el.classList.remove("clicked");
+      });
+    cssLink.classList.add("clicked");
+    showCardsByCategory("css");
+});
+js.addEventListener('click', () => {
+    links.forEach((el) => {
+        el.classList.remove("clicked");
+      });
+    jsLink.classList.add("clicked");
+    showCardsByCategory("js");
+});
+react.addEventListener('click', () => {
+    links.forEach((el) => {
+        el.classList.remove("clicked");
+      });
+    reactLink.classList.add("clicked");
+    showCardsByCategory("react");
+});
