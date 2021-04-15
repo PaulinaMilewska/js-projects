@@ -3,7 +3,7 @@ card.addEventListener( 'click', function() {
   card.classList.toggle('is-flipped');
 });
 
-const data = [
+const dataCSS = [
     // {
     //     "What is CSS ?": "The full form of CSS is Cascading Style Sheets. It is a styling language which is simple enough for HTML elements. It is popular in web designing, and its application is common in XHTML also"
     // }
@@ -29,13 +29,31 @@ const data = [
     // {
     //     "What is Alternate Style Sheet?" : "Alternate Style Sheets allows the user to select the style in which the page is displayed using the view>page style menu. Through Alternate Style Sheet, user can see a multiple version of the page on their needs and preferences"
     // }
+];
+
+const dataHTML = [
+    {
+        "What is HTML?" : "HTML is short for HyperText Markup Language and is the language of the World Wide Web. It is the standard text formatting language used for creating and displaying pages on the Web. HTML documents are made up of two things: the content and the tags that format it for proper display on pages"
+    },
+    {
+        "What are tags?" : "Content is placed in between HTML tags in order to properly format it. It makes use of the less than symbol (<) and the greater than symbol (>). A slash symbol is also used as a closing tag. For example: <strong>sample</strong>"
+    },
+    {
+        "Do all HTML tags come in a pair?" : "No, there are single HTML tags that do not need a closing tag. Examples are the <img> tag and <br> tags"
+    },
+    {
+        "What is an image map?" : "Image map lets you link to many different web pages using a single image. You can define shapes in images that you want to make part of an image mapping"
+    },
+    {
+        "How do you insert a copyright symbol on a browser page?" : "To insert the copyright symbol, you need to type &copy; or & #169; in an HTML file"
+    }
 ]
 
 let i = 0;
-function addData(){
+function addData(data, category){
     data.forEach( (element => {
         for (const [question, answer] of Object.entries(element)) {
-            fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/css.json`, {
+            fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`, {
             method: "POST",
             body: JSON.stringify({question, answer, index: i})
             })
@@ -44,47 +62,47 @@ function addData(){
     } ))
 }
 
-// addData();
+// addData(dataCSS, "css");
+// addData(dataHTML, "html");
 
-// const question = document.querySelector(".card__face--front");
+const question = document.querySelector(".card__face--front");
 const answer = document.querySelector(".card__face--back");
 
 
-let getQuestion = (event) =>
+let getQuestion = (category) =>
 // function getQuestion()
 {
-    return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/css.json`)
+    return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`)
     .then(res => res.json())
     .then(data => {
         return data;
-        // cssCards = data;
-        // for (const [index, value] of Object.entries(data)) {
-        //     cssCards.push(value);
-        // }
     })
     .catch((err) => {
         console.log('err', err.message);
     });
 }
-const question = document.querySelector(".card__face--front");
+// const question = document.querySelector(".card__face--front");
 // getQuestion();
 const renderCard = (cards) => {
-    let html = "";
+    let htmlQuestion = "";
+    let htmlAnswer = "";
     let index = 0;
     for (const [i, value] of Object.entries(cards)) {
         // console.log(index, value);
-        html = `${value.question}`
+        htmlQuestion = `${value.question}`
+        htmlAnswer = `${value.answer}`
         index = value.index;
         // console.log(html);
         // console.log(index);
     }
-    question.innerText = html;
+    question.innerText = htmlQuestion;
+    answer.innerText = htmlAnswer;
     return index;
 };
 
 let cssCards = [];
 
-getQuestion()
+getQuestion("html")
 .then( (cardsFromApi) => {
     cssCards = cardsFromApi;
     console.log("array", cssCards);
@@ -97,37 +115,32 @@ getQuestion()
     let index = 0;
     const rightBtn = document.querySelector(".right");
     const leftBtn = document.querySelector(".left");
-    var nextIndex = renderCard(cssCards) + 1;
-    console.log("nextIndex", nextIndex);
+    let nextIndex = renderCard(cssCards) + 1;
+    // console.log("nextIndex", nextIndex);
     rightBtn.addEventListener("click", () => {
         console.log("Next", cssCards);
-        console.log("stop");
-        let html = "";
+        console.log("nnneeexxxttt", nextIndex);
+        let htmlQuestion = "";
+        let htmlAnswer = "";
+        const tab = [];
         for (const [i, value] of Object.entries(cssCards)) {
-            index = value.index;
-            html = `${value.question}`
-            if(value.index === nextIndex){
+            
+            index = value.index || 0;
+            htmlQuestion = `${value.question}`;
+            htmlAnswer = `${value.answer}`;
+            if(index === nextIndex){
                 console.log(value);
-                question.innerText = html;
-                nextIndex++;
+                question.innerText = htmlQuestion;
+                answer.innerText = htmlAnswer;
             }
+            tab.push(index);
+            console.log("index",value.index);
+            console.log("nextIndex", nextIndex);
+            console.log(tab);
         }
-        console.log("index",index);
+        nextIndex++;
+        let max = Math.max(...tab);
+        console.log("max", max);
+        if(nextIndex> max) nextIndex = 1;
     })
 });
-
-// question1.inneText = "text";
-
-// getQuestion();
-// console.log("array", cssCards);
-
-const showNextQuestion = () => {
-    const rightBtn = document.querySelector(".right");
-    const leftBtn = document.querySelector(".left");
-    var nextIndex = renderCard(cssCards) + 1;
-    console.log("nextIndex", nextIndex);
-    rightBtn.addEventListener("click", () => {
-        console.log("Next", renderCard(cssCards));
-        console.log("stop");
-    })
-}
