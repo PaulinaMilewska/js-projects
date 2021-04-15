@@ -69,9 +69,10 @@ const question = document.querySelector(".card__face--front");
 const answer = document.querySelector(".card__face--back");
 
 
-let getQuestion = (category) =>
+let getQuestion = (category, dataArray) =>
 // function getQuestion()
 {
+    console.log(category);
     return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`)
     .then(res => res.json())
     .then(data => {
@@ -102,8 +103,9 @@ const renderCard = (cards) => {
 
 let cssCards = [];
 
-getQuestion("html")
+const showCardsByCategory = (category) => getQuestion(category)
 .then( (cardsFromApi) => {
+    // dataArray = cssCards;
     cssCards = cardsFromApi;
     console.log("array", cssCards);
 })
@@ -144,3 +146,12 @@ getQuestion("html")
         if(nextIndex> max) nextIndex = 1;
     })
 });
+
+const html = document.querySelector(".html");
+const css = document.querySelector(".css");
+const js = document.querySelector(".js");
+const react = document.querySelector(".react");
+html.addEventListener('click', () => showCardsByCategory("html"));
+css.addEventListener('click', () => showCardsByCategory("css"));
+js.addEventListener('click', () => showCardsByCategory("js"));
+react.addEventListener('click', () => showCardsByCategory("react"));
