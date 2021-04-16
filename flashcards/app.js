@@ -170,6 +170,7 @@ const showCardsByCategory = (category) => getQuestion(category)
     rightBtn.addEventListener("click", () => {
         console.log("render: ",renderCard(cssCards));
         leftBtn.classList.remove("display-none");
+        card.classList.remove("is-flipped");
         // console.log("Next", cssCards);
         let htmlQuestion = "";
         let htmlAnswer = "";
@@ -197,6 +198,7 @@ const showCardsByCategory = (category) => getQuestion(category)
         nextIndex++;
     });
     leftBtn.addEventListener("click", () => {
+        card.classList.remove("is-flipped");
         prevIndex = cardIndex - 1;
         if(prevIndex < 0) prevIndex = maxIndex;
         let htmlQuestion = "";
