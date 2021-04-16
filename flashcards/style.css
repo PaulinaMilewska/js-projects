@@ -10,6 +10,19 @@
     margin: 0;
  }
 
+ .goog-logo-link{
+    display: none;
+ }
+
+ li#google_translate_element {
+   background-color: #254636;
+   padding: 10px;
+}
+
+li#google_translate_element:hover {
+   background-color: rgb(255, 165, 0.8);
+}
+
 a {
    color: white;
    font-weight: 300;
