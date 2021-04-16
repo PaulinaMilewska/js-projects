@@ -145,39 +145,39 @@ const renderCard = (cards) => {
     return index;
 };
 
-let cssCards = [];
+let cardsArray = [];
 
 const showCardsByCategory = (category) => getQuestion(category)
 .then( (cardsFromApi) => {
-    cssCards = cardsFromApi;
-    console.log("array", cssCards);
+    cardsArray = cardsFromApi;
+    console.log("array", cardsArray);
 })
 .then(() => {
-    renderCard(cssCards);
-    // console.log("cssCards", cssCards);
+    renderCard(cardsArray);
+    // console.log("cardsArray", cardsArray);
 })
 .then(() => {
     let index = 0;
     const rightBtn = document.querySelector(".right");
     const leftBtn = document.querySelector(".left");
-    const maxIndex = renderCard(cssCards);
+    const maxIndex = renderCard(cardsArray);
     let cardIndex = null;
-    let nextIndex = renderCard(cssCards) + 1;
+    let nextIndex = renderCard(cardsArray) + 1;
     let prevIndex = 0;
     rightBtn.classList.remove("display-none");
     console.log("before click index", index);
     console.log("before click nextIndex", nextIndex);
     rightBtn.addEventListener("click", () => {
-        console.log("render: ",renderCard(cssCards));
+        console.log("render: ",renderCard(cardsArray));
         leftBtn.classList.remove("display-none");
         card.classList.remove("is-flipped");
-        // console.log("Next", cssCards);
+        // console.log("Next", cardsArray);
         let htmlQuestion = "";
         let htmlAnswer = "";
         if(cardIndex !== null) nextIndex = cardIndex + 1;
         if(nextIndex > maxIndex) nextIndex = 0;
         // const tab = [];
-        for (const [i, value] of Object.entries(cssCards)) {
+        for (const [i, value] of Object.entries(cardsArray)) {
             index = value.index || 0;
             htmlQuestion = `${value.question}`;
             htmlAnswer = `${value.answer}`;
@@ -203,7 +203,7 @@ const showCardsByCategory = (category) => getQuestion(category)
         if(prevIndex < 0) prevIndex = maxIndex;
         let htmlQuestion = "";
         let htmlAnswer = "";
-        for (const [i, value] of Object.entries(cssCards)) {
+        for (const [i, value] of Object.entries(cardsArray)) {
             index = value.index || 0;
             htmlQuestion = `${value.question}`;
             htmlAnswer = `${value.answer}`;
