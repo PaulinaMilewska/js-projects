@@ -26,10 +26,16 @@ a:hover {
    background: rgb(255, 165, 0.8);
 }
 
+.home a{
+   color: rgb(252, 252, 159);
+   /* font-size: 20px; */
+   font-weight: 600;
+}
+
 .main {
-   max-width: 1200px;
+   max-width: 1400px;
    margin: 0 auto;
-   padding: 0 3em 1.5em;
+   padding: 0 1em 1.5em;
 }
 
 .navigation ul {
@@ -50,6 +56,10 @@ a:hover {
 
 .clicked {
    background-color: rgb(161, 105, 0);
+}
+
+.display-none{
+   display: none !important;
 }
 
 @media all and (max-width: 1000px) {

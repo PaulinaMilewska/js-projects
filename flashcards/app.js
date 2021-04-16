@@ -4,31 +4,31 @@ card.addEventListener( 'click', function() {
 });
 
 const dataCSS = [
-    // {
-    //     "What is CSS ?": "The full form of CSS is Cascading Style Sheets. It is a styling language which is simple enough for HTML elements. It is popular in web designing, and its application is common in XHTML also"
-    // }
-    // ,
-    // {
-    //     "What is the origin of CSS ?" : "Standard Generalized Markup Language marked the beginning of style sheets in 1980s"
-    // },
-    // {
-    //     "What is Pseudo-elements ?" : "Pseudo-elements are used to add special effects to some selectors.  CSS in used to apply styles in HTML mark-up. In some cases when extra mark-up or styling is not possible for the document, then there is a feature available in CSS known as pseudo-elements. It will allow extra mark-up to the document without disturbing the actual document"
-    // },
+    {
+        "What is CSS ?": "The full form of CSS is Cascading Style Sheets. It is a styling language which is simple enough for HTML elements. It is popular in web designing, and its application is common in XHTML also"
+    }
+    ,
+    {
+        "What is the origin of CSS ?" : "Standard Generalized Markup Language marked the beginning of style sheets in 1980s"
+    },
+    {
+        "What is Pseudo-elements ?" : "Pseudo-elements are used to add special effects to some selectors.  CSS in used to apply styles in HTML mark-up. In some cases when extra mark-up or styling is not possible for the document, then there is a feature available in CSS known as pseudo-elements. It will allow extra mark-up to the document without disturbing the actual document"
+    },
     {
         "How does Z index function?" : "Overlapping may occur while using CSS for positioning HTML elements. Z index helps in specifying the overlapping element. It is a number which can be positive or negative, the default value being zero"
     }
     ,
-    // {
-    //     "What is Inline style?" : "The Inline style in a CSS is used to add up styling to individual HTML elements"
-    // }
-    // ,
-    // {   
-    //     "How comments can be added in CSS?" : "The comments in CSS can be added with /* and */"
-    // }
-    // ,
-    // {
-    //     "What is Alternate Style Sheet?" : "Alternate Style Sheets allows the user to select the style in which the page is displayed using the view>page style menu. Through Alternate Style Sheet, user can see a multiple version of the page on their needs and preferences"
-    // }
+    {
+        "What is Inline style?" : "The Inline style in a CSS is used to add up styling to individual HTML elements"
+    }
+    ,
+    {   
+        "How comments can be added in CSS?" : "The comments in CSS can be added with /* and */"
+    }
+    ,
+    {
+        "What is Alternate Style Sheet?" : "Alternate Style Sheets allows the user to select the style in which the page is displayed using the view>page style menu. Through Alternate Style Sheet, user can see a multiple version of the page on their needs and preferences"
+    }
 ];
 
 const dataHTML = [
@@ -92,9 +92,12 @@ const dataREACT = [
 ];
 
 let i = 0;
+// WHY addData() ADDS DOUBLE DATA!!!???
 function addData(data, category){
     data.forEach( (element => {
+        // console.log("element: ", element);
         for (const [question, answer] of Object.entries(element)) {
+            // console.log("Object.entries(element):",Object.entries(element));
             fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`, {
             method: "POST",
             body: JSON.stringify({question, answer, index: i})
@@ -157,34 +160,75 @@ const showCardsByCategory = (category) => getQuestion(category)
     let index = 0;
     const rightBtn = document.querySelector(".right");
     const leftBtn = document.querySelector(".left");
+    const maxIndex = renderCard(cssCards);
+    let cardIndex = null;
     let nextIndex = renderCard(cssCards) + 1;
-    // console.log("nextIndex", nextIndex);
+    let prevIndex = 0;
+    rightBtn.classList.remove("display-none");
+    console.log("before click index", index);
+    console.log("before click nextIndex", nextIndex);
     rightBtn.addEventListener("click", () => {
+        console.log("render: ",renderCard(cssCards));
+        leftBtn.classList.remove("display-none");
         // console.log("Next", cssCards);
         let htmlQuestion = "";
         let htmlAnswer = "";
-        const tab = [];
+        if(cardIndex !== null) nextIndex = cardIndex + 1;
+        if(nextIndex > maxIndex) nextIndex = 0;
+        // const tab = [];
         for (const [i, value] of Object.entries(cssCards)) {
-            
             index = value.index || 0;
             htmlQuestion = `${value.question}`;
             htmlAnswer = `${value.answer}`;
+            // console.log("index", index);
+            // console.log("nextIndex", nextIndex);
             if(index === nextIndex){
                 console.log(value);
                 question.innerText = htmlQuestion;
                 answer.innerText = htmlAnswer;
             }
-            tab.push(index);
             // console.log("index",value.index);
             // console.log("nextIndex", nextIndex);
             // console.log(tab);
         }
+        cardIndex = nextIndex;
+        // console.log("nextIndex", nextIndex);
+        console.log("cardIndex", cardIndex);
         nextIndex++;
-        let max = Math.max(...tab);
-        // console.log("max", max);
-        // looping
-        if(nextIndex> max) nextIndex = 1;
+    });
+    leftBtn.addEventListener("click", () => {
+        prevIndex = cardIndex - 1;
+        if(prevIndex < 0) prevIndex = maxIndex;
+        let htmlQuestion = "";
+        let htmlAnswer = "";
+        for (const [i, value] of Object.entries(cssCards)) {
+            index = value.index || 0;
+            htmlQuestion = `${value.question}`;
+            htmlAnswer = `${value.answer}`;
+            if(index === prevIndex){
+                console.log(value);
+                question.innerText = htmlQuestion;
+                answer.innerText = htmlAnswer;
+            }
+            // console.log("index",value.index);
+            // console.log("nextIndex", nextIndex);
+        }
+        // console.log("prevIndex", prevIndex);
+        // console.log("cardIndex", cardIndex);
+        cardIndex = prevIndex;
+        console.log("cardIndex", cardIndex);
     })
+});
+
+const home = document.querySelector(".home");
+const homeLink = document.querySelector(".home a");
+homeLink.classList.add("clicked");
+home.addEventListener("click", () => {
+    links.forEach((el) => {
+        el.classList.remove("clicked");
+      });
+    homeLink.classList.add("clicked");
+    question.innerText = "Do you already know the answers\nto all the questions?\n\nTry to answer all the them :)";
 });
 
 const html = document.querySelector(".html");
