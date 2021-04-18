@@ -145,6 +145,45 @@ const renderCard = (cards) => {
     return index;
 };
 
+let index = 0;
+const rightBtn = document.querySelector(".right");
+const leftBtn = document.querySelector(".left");
+let cardIndex = null;
+let prevIndex = 0;
+let maxIndex = 0;
+
+btnNavigationHandler = (btn, indexTrend) => {
+    btn.addEventListener("click", () => {
+        console.log("render: ",renderCard(cardsArray));
+        card.classList.remove("is-flipped");
+        let htmlQuestion = "";
+        let htmlAnswer = "";
+        if(btn === rightBtn){
+            leftBtn.classList.remove("display-none");
+            if(cardIndex !== null) indexTrend = cardIndex + 1;
+            if(indexTrend > maxIndex) indexTrend = 0;
+        } else if(btn === leftBtn){
+            indexTrend = cardIndex - 1;
+            if(indexTrend < 0) indexTrend = maxIndex;
+        }
+        for (const [i, value] of Object.entries(cardsArray)) {
+            index = value.index || 0;
+            htmlQuestion = `${value.question}`;
+            htmlAnswer = `${value.answer}`;
+            if(index === indexTrend){
+                console.log(value);
+                question.innerText = htmlQuestion;
+                answer.innerText = htmlAnswer;
+            }
+        }
+        cardIndex = indexTrend;
+        console.log("cardIndex", cardIndex);
+        if(btn === rightBtn){
+            indexTrend++;
+        }
+    });
+}
+
 let cardsArray = [];
 
 const showCardsByCategory = (category) => getQuestion(category)
@@ -158,70 +197,14 @@ const showCardsByCategory = (category) => getQuestion(category)
 })
 .then(() => {
     card.classList.remove("is-flipped");
-    let index = 0;
-    const rightBtn = document.querySelector(".right");
-    const leftBtn = document.querySelector(".left");
     leftBtn.classList.add("display-none");
-    const maxIndex = renderCard(cardsArray);
-    let cardIndex = null;
-    let nextIndex = renderCard(cardsArray) + 1;
-    let prevIndex = 0;
     rightBtn.classList.remove("display-none");
+    maxIndex = renderCard(cardsArray);
+    let nextIndex = renderCard(cardsArray) + 1;
     console.log("before click index", index);
     console.log("before click nextIndex", nextIndex);
-    rightBtn.addEventListener("click", () => {
-        console.log("render: ",renderCard(cardsArray));
-        leftBtn.classList.remove("display-none");
-        card.classList.remove("is-flipped");
-        // console.log("Next", cardsArray);
-        let htmlQuestion = "";
-        let htmlAnswer = "";
-        if(cardIndex !== null) nextIndex = cardIndex + 1;
-        if(nextIndex > maxIndex) nextIndex = 0;
-        // const tab = [];
-        for (const [i, value] of Object.entries(cardsArray)) {
-            index = value.index || 0;
-            htmlQuestion = `${value.question}`;
-            htmlAnswer = `${value.answer}`;
-            // console.log("index", index);
-            // console.log("nextIndex", nextIndex);
-            if(index === nextIndex){
-                console.log(value);
-                question.innerText = htmlQuestion;
-                answer.innerText = htmlAnswer;
-            }
-            // console.log("index",value.index);
-            // console.log("nextIndex", nextIndex);
-            // console.log(tab);
-        }
-        cardIndex = nextIndex;
-        // console.log("nextIndex", nextIndex);
-        console.log("cardIndex", cardIndex);
-        nextIndex++;
-    });
-    leftBtn.addEventListener("click", () => {
-        card.classList.remove("is-flipped");
-        prevIndex = cardIndex - 1;
-        if(prevIndex < 0) prevIndex = maxIndex;
-        let htmlQuestion = "";
-        let htmlAnswer = "";
-        for (const [i, value] of Object.entries(cardsArray)) {
-            index = value.index || 0;
-            htmlQuestion = `${value.question}`;
-            htmlAnswer = `${value.answer}`;
-            if(index === prevIndex){
-                console.log(value);
-                question.innerText = htmlQuestion;
-                answer.innerText = htmlAnswer;
-            }
-            // console.log("index",value.index);
-            // console.log("nextIndex", nextIndex);
-        }
-        // console.log("prevIndex", prevIndex);
-        // console.log("cardIndex", cardIndex);
-        cardIndex = prevIndex;
-        console.log("cardIndex", cardIndex);
-    })
+    btnNavigationHandler(rightBtn, nextIndex);
+    btnNavigationHandler(leftBtn, prevIndex);
 });
 
 const home = document.querySelector(".home");
