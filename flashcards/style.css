@@ -152,6 +152,7 @@ a:hover {
     padding: 20px;
     cursor: pointer;
     background-color: inherit;
+    outline: 0;
   }
   
   .right {

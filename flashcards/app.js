@@ -99,7 +99,7 @@ function addData(data, category){
         for (const [question, answer] of Object.entries(element)) {
             // console.log("Object.entries(element):",Object.entries(element));
             fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`, {
-            method: "POST",
+            method: "POST", //PUT 
             body: JSON.stringify({question, answer, index: i})
             })
         }
@@ -246,34 +246,20 @@ const jsLink = document.querySelector(".js a");
 const react = document.querySelector(".react");
 const reactLink = document.querySelector(".react a");
 const links = document.querySelectorAll(".navigation ul li a");
-html.addEventListener('click', () => {
-    links.forEach((el) => {
-        el.classList.remove("clicked");
-      });
-    htmlLink.classList.add("clicked");
-    showCardsByCategory("html");
-});
-css.addEventListener('click', () => {
-    links.forEach((el) => {
-        el.classList.remove("clicked");
-      });
-    cssLink.classList.add("clicked");
-    showCardsByCategory("css");
-});
-js.addEventListener('click', () => {
-    links.forEach((el) => {
-        el.classList.remove("clicked");
-      });
-    jsLink.classList.add("clicked");
-    showCardsByCategory("js");
-});
-react.addEventListener('click', () => {
-    links.forEach((el) => {
-        el.classList.remove("clicked");
-      });
-    reactLink.classList.add("clicked");
-    showCardsByCategory("react");
-});
+
+categoryBtnHandler = (categoryBtn, category) => {
+    categoryBtn.addEventListener('click', () => {
+        links.forEach((el) => {
+            el.classList.remove("clicked");
+          });
+        htmlLink.classList.add("clicked");
+        showCardsByCategory(category);
+    });
+}
+categoryBtnHandler(html, "html");
+categoryBtnHandler(css, "css");
+categoryBtnHandler(js, "js");
+categoryBtnHandler(react, "react");
 
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
