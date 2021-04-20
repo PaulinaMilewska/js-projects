@@ -99,4 +99,16 @@ function addData(data, category){
     } ))
 }
 
-export {dataCSS, dataHTML, dataJS, dataREACT, addData};
+let getData = (category) =>{
+    console.log(category);
+    return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`)
+    .then(res => res.json())
+    .then(data => {
+        return data;
+    })
+    .catch((err) => {
+        console.log('err', err.message);
+    });
+}
+
+export {dataCSS, dataHTML, dataJS, dataREACT, addData, getData};
