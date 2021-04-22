@@ -2,7 +2,6 @@ import {renderCard} from './card.js';
 import {getData} from './data.js';
 
 let cardsArray = [];
-const userCads = [];
 const card = document.querySelector('.card');
 const question = document.querySelector(".card__face--front");
 const answer = document.querySelector(".card__face--back");
@@ -11,11 +10,14 @@ let starQuestion = "";
 let starAnswer = "";
 let htmlQuestion = "";
 let htmlAnswer = "";
+let categoryFromApi = "";
+let cardId = "";
 
 export const showCardsByCategory = (category) => getData(category)
 .then( (cardsFromApi) => {
     cardsArray = cardsFromApi;
     console.log("SHOW THEN 1","array", cardsArray);
+    categoryFromApi = category;
 })
 .then(() => {
     renderCard(cardsArray);
@@ -29,7 +31,6 @@ export const showCardsByCategory = (category) => getData(category)
     const rightBtn = document.querySelector(".right");
     const leftBtn = document.querySelector(".left");
     leftBtn.classList.add("display-none");
-    // const maxIndex = renderCard(cardsArray);
     const maxIndex = objectLength(cardsArray)-1;
     console.log("max index:", maxIndex);
     console.log("length", objectLength(cardsArray));
@@ -39,9 +40,17 @@ export const showCardsByCategory = (category) => getData(category)
     rightBtn.classList.remove("display-none");
     console.log("before click index", index);
     console.log("before click nextIndex", nextIndex);
+        for (const [i, value] of Object.entries(cardsArray)) {
+            index = value.index || 0;
+            if(index === renderCard(cardsArray)){
+                cardId = i;
+                break;
+            }
+        }
+    console.log("555555", cardId);
     starHandler();
+
     rightBtn.addEventListener("click", () => {
-        console.log("render: ",renderCard(cardsArray));
         leftBtn.classList.remove("display-none");
         card.classList.remove("is-flipped");
         let htmlQuestion = "";
@@ -58,6 +67,7 @@ export const showCardsByCategory = (category) => getData(category)
                 answer.innerText = htmlAnswer;
                 starQuestion = htmlQuestion;
                 starAnswer = htmlAnswer;
+                cardId = i;
                 break;
             }
         }
@@ -82,6 +92,7 @@ export const showCardsByCategory = (category) => getData(category)
                 answer.innerText = htmlAnswer;
                 starQuestion = htmlQuestion;
                 starAnswer = htmlAnswer;
+                cardId = i;
                 break;
             }
         }
@@ -91,30 +102,30 @@ export const showCardsByCategory = (category) => getData(category)
     });
 });
 
+const editStar = (cardId, isSelected) => {
+    fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${categoryFromApi}/${cardId}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify({ isSelected })
+    })
+}
+
 star.addEventListener('click', () => {
     star.classList.toggle("selected");
     card.classList.add("is-flipped");
     if(star.classList.contains('selected')){
-        userCads.push({starQuestion, starAnswer});
-        console.log("is selected?", star.classList.contains('selected'));
-        console.log("USER CARDS add: ", userCads);
+        editStar(cardId, true);
     } else if(!star.classList.contains('selected')){
-        userCads.forEach( (item, index, arr) => {
-            if(item.starQuestion === starQuestion) arr.splice(index, 1);
-        } )
-        console.log("is selected?", star.classList.contains('selected'));
-        console.log("USER CARDS remove: ", userCads);
+        editStar(cardId, false);
     }
 });
 
 const starHandler = () => {
     star.classList.remove("selected");
-    userCads.forEach(card => {
-        if(card.starQuestion === starQuestion) {
-            console.log("userCard -> star q",card.starQuestion === starQuestion);
+    for (const [i, value] of Object.entries(cardsArray)) {
+        if(i === cardId && value.isSelected === true) {
             star.classList.add("selected");
         }
-    })
+    }
 }
 
 const objectLength = (object) => {

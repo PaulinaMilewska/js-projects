@@ -110,4 +110,11 @@ let getData = (category) =>{
     });
 }
 
+// const editStar = (cardId, isSelected) => {
+//     fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${categoryFromApi}/${cardId}.json`, {
+//         method: 'PATCH',
+//         body: JSON.stringify({ isSelected })
+//     })
+// }
+
 export {dataCSS, dataHTML, dataJS, dataREACT, addData, getData};
