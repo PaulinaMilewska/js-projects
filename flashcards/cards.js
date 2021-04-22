@@ -29,9 +29,12 @@ export const showCardsByCategory = (category) => getData(category)
     const rightBtn = document.querySelector(".right");
     const leftBtn = document.querySelector(".left");
     leftBtn.classList.add("display-none");
-    const maxIndex = renderCard(cardsArray);
+    // const maxIndex = renderCard(cardsArray);
+    const maxIndex = objectLength(cardsArray)-1;
+    console.log("max index:", maxIndex);
+    console.log("length", objectLength(cardsArray));
     let cardIndex = null;
-    let nextIndex = renderCard(cardsArray) + 1;
+    let nextIndex = maxIndex + 1;
     let prevIndex = 0;
     rightBtn.classList.remove("display-none");
     console.log("before click index", index);
@@ -55,6 +58,7 @@ export const showCardsByCategory = (category) => getData(category)
                 answer.innerText = htmlAnswer;
                 starQuestion = htmlQuestion;
                 starAnswer = htmlAnswer;
+                break;
             }
         }
         starHandler();
@@ -78,6 +82,7 @@ export const showCardsByCategory = (category) => getData(category)
                 answer.innerText = htmlAnswer;
                 starQuestion = htmlQuestion;
                 starAnswer = htmlAnswer;
+                break;
             }
         }
         starHandler();
@@ -110,4 +115,8 @@ const starHandler = () => {
             star.classList.add("selected");
         }
     })
+}
+
+const objectLength = (object) => {
+    return Object.keys(object).length;
 }

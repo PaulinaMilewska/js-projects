@@ -92,13 +92,12 @@ function addData(data, category){
         for (const [question, answer] of Object.entries(element)) {
             fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`, {
             method: "POST", //PUT 
-            body: JSON.stringify({question, answer, index: i})
+            body: JSON.stringify({question, answer, index: i, isSelected: false})
             })
         }
         i++;
     } ))
 }
-
 let getData = (category) =>{
     console.log(category);
     return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${category}.json`)
