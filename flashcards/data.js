@@ -110,6 +110,68 @@ let getData = (category) =>{
     });
 }
 
+// let starData = {};
+// let starArr = [];
+let fromDbToObj = {};
+
+let getAllData = () => {
+    let starArr = [];
+
+    // console.log(category);
+    return fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data.json`)
+    .then(res => res.json())
+    .then(data => {
+        for (const [i, value] of Object.entries(data)) {
+            let v = value;
+            for (const [i, value] of Object.entries(v)) {
+                let index = 0;
+                if(value.isSelected === true){
+                console.log("iii", i, "value", value);
+                    // let newIndex = i;
+                    // fromDbToObj = () => Object.entries(value).reduce((result, [id, val]) => { result.push(i, val.answer, val.question, index, val.isSelected); return result; }, {});
+                    // fromDbToObj = () => Object.entries(value).reduce((result, [id, val]) => { result[id] = {"newIndex": index, ...val}; return result; }, {});
+                    // fromDbToObj = () => Object.entries(dbData).reduce((result, [id, value]) => { result[id] = value; return result; }, {})
+                    starArr.push(
+                        { 
+                            "dbIndex" : i,
+                            "answer": value.answer,
+                            "index": index,
+                            "isSelected": value.isSelected,
+                            "question": value.question
+                        }
+                    )
+                // let inde = ind;
+                    // console.log("+++++", i, value.question);
+                    // starData
+                    // starData.push({ 
+                    //     "dbIndex" : i,
+                    //     "answer": value.answer,
+                    //     "index": index,
+                    //     "isSelected": value.isSelected,
+                    //     "question": value.question
+                    // })
+                    // for(const[key, value] of Object.entries(starData)){
+                    //   
+                    index++;
+                }
+            }
+        }
+        // console.log("fromDbToObj", fromDbToObj());
+        // console.log("AAAAAAA", ...starArr);
+        const starData = {...starArr};
+        console.log("AAAAAAA", starData);
+        // console.log("BBBBBBB", data);
+
+        return starData;
+    })
+    .catch((err) => {
+        console.log('err', err.message);
+    });
+}
+
+// getAllData();
+
+
 // const editStar = (cardId, isSelected) => {
 //     fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${categoryFromApi}/${cardId}.json`, {
 //         method: 'PATCH',
@@ -117,4 +179,4 @@ let getData = (category) =>{
 //     })
 // }
 
-export {dataCSS, dataHTML, dataJS, dataREACT, addData, getData};
+export {dataCSS, dataHTML, dataJS, dataREACT, addData, getData, getAllData};

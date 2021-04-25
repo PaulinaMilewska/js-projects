@@ -183,6 +183,12 @@ a:hover {
      font-weight: 900 !important;
   }
 
+  .custom a{
+     color: yellow;
+     font-weight: 600;
+     text-transform: uppercase;
+  }
+
 @media all and (max-width: 480px) {
    .navigation li {
       flex-basis: 100%;

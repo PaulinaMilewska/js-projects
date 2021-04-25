@@ -1,5 +1,5 @@
-import {renderCard} from './card.js';
-import {getData} from './data.js';
+import {renderCard, renderCardFromArray} from './card.js';
+import {getData, getAllData} from './data.js';
 
 let cardsArray = [];
 const card = document.querySelector('.card');
@@ -12,6 +12,8 @@ let htmlQuestion = "";
 let htmlAnswer = "";
 let categoryFromApi = "";
 let cardId = "";
+const rightBtn = document.querySelector(".right");
+const leftBtn = document.querySelector(".left");
 
 export const showCardsByCategory = (category) => getData(category)
 .then( (cardsFromApi) => {
@@ -28,8 +30,6 @@ export const showCardsByCategory = (category) => getData(category)
     card.classList.remove("is-flipped");
     star.classList.remove("display-none");
     let index = 0;
-    const rightBtn = document.querySelector(".right");
-    const leftBtn = document.querySelector(".left");
     leftBtn.classList.add("display-none");
     const maxIndex = objectLength(cardsArray)-1;
     console.log("max index:", maxIndex);
@@ -40,15 +40,21 @@ export const showCardsByCategory = (category) => getData(category)
     rightBtn.classList.remove("display-none");
     console.log("before click index", index);
     console.log("before click nextIndex", nextIndex);
+        let htmlQuestion = "";
+        let htmlAnswer = "";
         for (const [i, value] of Object.entries(cardsArray)) {
             index = value.index || 0;
-            if(index === renderCard(cardsArray)){
+            htmlQuestion = `${value.question}`;
+            htmlAnswer = `${value.answer}`;
+            if(index === maxIndex){
+                question.innerText = htmlQuestion;
+                answer.innerText = htmlAnswer;
                 cardId = i;
                 break;
             }
         }
-    console.log("555555", cardId);
-    starHandler();
+    console.log("cardId", cardId);
+    starHandler(cardsArray);
 
     rightBtn.addEventListener("click", () => {
         leftBtn.classList.remove("display-none");
@@ -71,13 +77,14 @@ export const showCardsByCategory = (category) => getData(category)
                 break;
             }
         }
-        starHandler();
+        starHandler(cardsArray);
         cardIndex = nextIndex;
         console.log("cardIndex", cardIndex);
         nextIndex++;
         console.log("RRRR", htmlQuestion);
 
     });
+
     leftBtn.addEventListener("click", () => {
         card.classList.remove("is-flipped");
         prevIndex = cardIndex - 1;
@@ -96,7 +103,7 @@ export const showCardsByCategory = (category) => getData(category)
                 break;
             }
         }
-        starHandler();
+        starHandler(cardsArray);
         cardIndex = prevIndex;
         console.log("cardIndex", cardIndex);
     });
@@ -106,7 +113,30 @@ const editStar = (cardId, isSelected) => {
     fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${categoryFromApi}/${cardId}.json`, {
         method: 'PATCH',
         body: JSON.stringify({ isSelected })
-    })
+    });
+    for (const [i, value] of Object.entries(cardsArray)) {
+        if(i === cardId && value.isSelected === true) {
+            value.isSelected = false;
+        } else if(i === cardId && value.isSelected === false){
+            value.isSelected = true;
+        }
+    }
+    for (const [i, value] of Object.entries(starCards)) {
+        if(value.dbIndex === cardId && value.isSelected === true) {
+            value.isSelected = false;
+            console.log("!!!! ", cardId);
+            console.log("*** starCards", starCards);
+            for (const [i, value] of Object.entries(cardsArray)) {
+                if(i === cardId && value.isSelected === true) {
+                    value.isSelected = false;
+                } else if(i === cardId && value.isSelected === false){
+                    value.isSelected = true;
+                }
+            }
+        } else if(value.dbIndex === cardId && value.isSelected === false){
+            value.isSelected = true;
+        }
+    }
 }
 
 star.addEventListener('click', () => {
@@ -119,15 +149,84 @@ star.addEventListener('click', () => {
     }
 });
 
-const starHandler = () => {
+const starHandler = (array) => {
     star.classList.remove("selected");
-    for (const [i, value] of Object.entries(cardsArray)) {
-        if(i === cardId && value.isSelected === true) {
+    for (const [i, value] of Object.entries(array)) {
+        console.log("SSSTTTAAARRR");
+        console.log("i", i);
+        console.log("cardId", cardId);
+        console.log("value.isSelected === true", value.isSelected === true);
+        if((i === cardId || value.dbIndex === cardId ) && value.isSelected === true) {
+            console.log("IIINNN", i, cardId);
             star.classList.add("selected");
+            break;
         }
     }
 }
 
 const objectLength = (object) => {
     return Object.keys(object).length;
+}
+
+const myCardsBtn = document.querySelector('.custom');
+
+// const myCards = () => {
+
+// }
+let starCards = [];
+myCardsBtn.addEventListener('click', () => {
+    rightBtn.classList.remove("display-none");
+    // const starData = renderCardFromArray(cardsArray, htmlQuestion, htmlAnswer);
+    const starData = getAllData().then( cards => {
+        starCards = cards;
+        star.classList.remove("display-none");
+        star.classList.add("selected");
+        let starIndex = 0;
+        // for (const [i, value] of Object.entries(cards)) {
+        //     console.log("starIndex", typeof starIndex);
+        //     console.log("i", typeof i);
+        //     console.log("value.question", value.question);
+        //     if( parseInt(i) === starIndex){
+        //         console.log("INNN");
+        //         htmlQuestion = `${value.question}`
+        //         htmlAnswer = `${value.answer}`
+        //         // index = value.index;
+        //         cardId = value.dbIndex;
+        //         break;
+        //     }
+        // }
+        // question.innerText = htmlQuestion;
+        // answer.innerText = htmlAnswer;
+        cardIterate(starCards, starIndex);
+
+        rightBtn.addEventListener('click', () => {
+            leftBtn.classList.remove("display-none");
+            starIndex++;
+            const maxIndex = objectLength(starCards)-1;
+            console.log("cards.length", maxIndex);
+            if(starIndex > maxIndex) starIndex = 0;
+            cardIterate(starCards, starIndex);
+        })
+
+    })
+})
+
+const cardIterate = (data, index) => {
+    for (const [i, value] of Object.entries(data)) {
+        console.log("starIndex", typeof index);
+        console.log("i", typeof i);
+        console.log("value.question", value.question);
+        if( parseInt(i) === index){
+            console.log("INNN");
+            htmlQuestion = `${value.question}`
+            htmlAnswer = `${value.answer}`
+            // index = value.index;
+            cardId = value.dbIndex;
+            break;
+        }
+    }
+    question.innerText = htmlQuestion;
+    answer.innerText = htmlAnswer;
+    starHandler(data);
+
 }
