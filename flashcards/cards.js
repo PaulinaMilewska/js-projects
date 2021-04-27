@@ -184,14 +184,20 @@ myCardsBtn.addEventListener('click', () => {
         star.classList.add("selected");
         let starIndex = 0;
         cardIterate(starCards, starIndex);
+        const maxIndex = objectLength(starCards)-1;
         rightBtn.addEventListener('click', () => {
             leftBtn.classList.remove("display-none");
             starIndex++;
-            const maxIndex = objectLength(starCards)-1;
             console.log("cards.length", maxIndex);
             if(starIndex > maxIndex) starIndex = 0;
             cardIterate(starCards, starIndex);
-        })
+        });
+        leftBtn.addEventListener('click', () => {
+            starIndex--;
+            console.log("cards.length", maxIndex);
+            if(starIndex < 0) starIndex = maxIndex;
+            cardIterate(starCards, starIndex);
+        });
 
     })
 })
