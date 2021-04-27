@@ -110,10 +110,6 @@ export const showCardsByCategory = (category) => getData(category)
 });
 
 const editStar = (cardId, isSelected) => {
-    fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${categoryFromApi}/${cardId}.json`, {
-        method: 'PATCH',
-        body: JSON.stringify({ isSelected })
-    });
     for (const [i, value] of Object.entries(cardsArray)) {
         if(i === cardId && value.isSelected === true) {
             value.isSelected = false;
@@ -123,6 +119,7 @@ const editStar = (cardId, isSelected) => {
     }
     for (const [i, value] of Object.entries(starCards)) {
         if(value.dbIndex === cardId && value.isSelected === true) {
+            categoryFromApi = value.category;
             value.isSelected = false;
             console.log("!!!! ", cardId);
             console.log("*** starCards", starCards);
@@ -137,6 +134,10 @@ const editStar = (cardId, isSelected) => {
             value.isSelected = true;
         }
     }
+    fetch(`https://flashcards-ef26e-default-rtdb.firebaseio.com/data/${categoryFromApi}/${cardId}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify({ isSelected })
+    });
 }
 
 star.addEventListener('click', () => {
@@ -182,23 +183,7 @@ myCardsBtn.addEventListener('click', () => {
         star.classList.remove("display-none");
         star.classList.add("selected");
         let starIndex = 0;
-        // for (const [i, value] of Object.entries(cards)) {
-        //     console.log("starIndex", typeof starIndex);
-        //     console.log("i", typeof i);
-        //     console.log("value.question", value.question);
-        //     if( parseInt(i) === starIndex){
-        //         console.log("INNN");
-        //         htmlQuestion = `${value.question}`
-        //         htmlAnswer = `${value.answer}`
-        //         // index = value.index;
-        //         cardId = value.dbIndex;
-        //         break;
-        //     }
-        // }
-        // question.innerText = htmlQuestion;
-        // answer.innerText = htmlAnswer;
         cardIterate(starCards, starIndex);
-
         rightBtn.addEventListener('click', () => {
             leftBtn.classList.remove("display-none");
             starIndex++;

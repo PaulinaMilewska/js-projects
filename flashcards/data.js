@@ -122,6 +122,7 @@ let getAllData = () => {
     .then(res => res.json())
     .then(data => {
         for (const [i, value] of Object.entries(data)) {
+            let category = i;
             let v = value;
             for (const [i, value] of Object.entries(v)) {
                 let index = 0;
@@ -134,24 +135,13 @@ let getAllData = () => {
                     starArr.push(
                         { 
                             "dbIndex" : i,
+                            "category" : category,
                             "answer": value.answer,
                             "index": index,
                             "isSelected": value.isSelected,
                             "question": value.question
                         }
                     )
-                // let inde = ind;
-                    // console.log("+++++", i, value.question);
-                    // starData
-                    // starData.push({ 
-                    //     "dbIndex" : i,
-                    //     "answer": value.answer,
-                    //     "index": index,
-                    //     "isSelected": value.isSelected,
-                    //     "question": value.question
-                    // })
-                    // for(const[key, value] of Object.entries(starData)){
-                    //   
                     index++;
                 }
             }
