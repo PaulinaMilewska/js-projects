@@ -122,7 +122,13 @@ const editStar = (cardId, isSelected) => {
             categoryFromApi = value.category;
             value.isSelected = false;
             console.log("!!!! ", cardId);
+            console.log("iii", i);
+            console.log(Object.entries(starCards)[i]);
             console.log("*** starCards", starCards);
+            // console.log(starCards.);
+            // starCards.splice(i, 1); 
+            // delete starCards[i];
+            console.log("---- starCards", starCards);
             for (const [i, value] of Object.entries(cardsArray)) {
                 if(i === cardId && value.isSelected === true) {
                     value.isSelected = false;
@@ -153,10 +159,10 @@ star.addEventListener('click', () => {
 const starHandler = (array) => {
     star.classList.remove("selected");
     for (const [i, value] of Object.entries(array)) {
-        console.log("SSSTTTAAARRR");
-        console.log("i", i);
-        console.log("cardId", cardId);
-        console.log("value.isSelected === true", value.isSelected === true);
+        // console.log("SSSTTTAAARRR");
+        // console.log("i", i);
+        // console.log("cardId", cardId);
+        // console.log("value.isSelected === true", value.isSelected === true);
         if((i === cardId || value.dbIndex === cardId ) && value.isSelected === true) {
             console.log("IIINNN", i, cardId);
             star.classList.add("selected");
@@ -170,14 +176,16 @@ const objectLength = (object) => {
 }
 
 const myCardsBtn = document.querySelector('.custom');
+const myCardsBtnLink = document.querySelector('.custom a');
+const links = document.querySelectorAll(".navigation ul li a");
 
-// const myCards = () => {
-
-// }
 let starCards = [];
 myCardsBtn.addEventListener('click', () => {
+    links.forEach((el) => {
+        el.classList.remove("clicked");
+      });
+    myCardsBtnLink.classList.add("clicked");
     rightBtn.classList.remove("display-none");
-    // const starData = renderCardFromArray(cardsArray, htmlQuestion, htmlAnswer);
     const starData = getAllData().then( cards => {
         starCards = cards;
         star.classList.remove("display-none");
@@ -188,11 +196,14 @@ myCardsBtn.addEventListener('click', () => {
         rightBtn.addEventListener('click', () => {
             leftBtn.classList.remove("display-none");
             starIndex++;
-            console.log("cards.length", maxIndex);
+            console.log("cards....", starCards);
+            console.log("index....", starIndex);
             if(starIndex > maxIndex) starIndex = 0;
             cardIterate(starCards, starIndex);
         });
         leftBtn.addEventListener('click', () => {
+            console.log("cards....", starCards);
+            console.log("index....", starIndex);
             starIndex--;
             console.log("cards.length", maxIndex);
             if(starIndex < 0) starIndex = maxIndex;
