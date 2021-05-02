@@ -1,11 +1,16 @@
+const joke = document.querySelector(".joke");
+
 function getRandomJoke() {
     fetch("https://api.chucknorris.io/jokes/random")
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+        console.log(data.value);
+        joke.innerText = data.value;
+    })
     .catch(rej => console.log(rej.message));
 }
 
-getRandomJoke();
+// getRandomJoke();
 
 function getCategories(){
     fetch("https://api.chucknorris.io/jokes/categories")
@@ -14,7 +19,7 @@ function getCategories(){
     .catch(rej => console.log(rej.message));
 }
 
-getCategories();
+// getCategories();
 
 function getJokesByQuery(query){
     fetch(`https://api.chucknorris.io/jokes/search?query=${query}`)
@@ -23,4 +28,12 @@ function getJokesByQuery(query){
     .catch(rej => console.log(rej.message));
 }
 
-getJokesByQuery("dog");
+// getJokesByQuery("dog");
+
+const chuckBtn = document.querySelector(".box a");
+
+chuckBtn.addEventListener('click', getRandomJoke()
+    // .then(data => {
+    //     joke.innerText = data.value;
+    // })
+)
