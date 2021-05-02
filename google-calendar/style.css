@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+body::after {
+  content: "";
+  background: url("./images/calendarAndCup.jpg");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-size: cover;
+}
+
+
 a {
   color: white;
   font-weight: 300;
@@ -32,6 +46,7 @@ a:hover {
   margin: 0;
   padding: 0;
   display: flex;
+  background-color: rgb(42, 71, 100);
 }
 
 .navigation li {
@@ -48,4 +63,8 @@ form{
     width: 70vw;
     padding: 30px;
     background-color:lightgray;
+}
+
+.logo a img{
+  width: 30px;
 }

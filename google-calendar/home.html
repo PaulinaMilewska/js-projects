@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Task manager</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main">
+        <nav class="navigation">
+          <ul>
+            <li class="logo"><a href="#"><img src="./images/checklist.png" alt=""></a></li>
+            <li class="tasks"><a href="#">Tasks</a></li>
+            <li class="sign-in"><a href="#">Sign in</a></li>
+            <li class="log-in"><a href="#">Log in</a></li>
+          </ul>
+        </nav>
+        <!-- <img src="./images/calendarAndCup.jpg" alt=""> -->
+      </div>
+      <main>
+        <form action="">
+          <label for="taskName">Task</label>
+          <input class="taskName" type="text" name="taskName" id="taskName"/>
+          <label for="date">Date</label>
+          <input class="date" type="date" name="date" id="date"/>
+          <select name="categories" id="categories">
+            <option value="work">Work</option>
+            <option value="shopping">Shopping</option>
+            </select>
+          <button type="submit">Add</button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
