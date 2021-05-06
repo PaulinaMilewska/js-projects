@@ -1,20 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Facts - not myths</title>
-</head>
-<body>
-    <h1>Chuck Norris fact</h1>
-    <main>
-        <div class="box">
-            <a href=""><img src="./images/face-round.png" alt=""></a>
-        </div>
-    </main>
-    <blockquote><p class="joke"></p></blockquote>
-    <script src="./app.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+        />
+        <title>Facts - not myths</title>
+    </head>
+    <body>
+        <h1>Chuck Norris fact</h1>
+        <nav>
+            <ul class="categories">
+                <li data-category="animal">
+                    <a href="/">
+                        <i class="fas fa-paw"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about animals</a></li>
+                    </ul>
+                </li>
+                <li data-category="travel">
+                    <a href="/">
+                        <i class="fas fa-plane"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about travel</a></li>
+                    </ul>
+                </li>
+                <li data-category="celebrity">
+                    <a href="/">
+                        <i class="fas fa-glass-cheers"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about celebrity</a></li>
+                    </ul>
+                </li>
+                <li data-category="dev">
+                    <a href="/">
+                        <i class="fas fa-code"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about dev</a></li>
+                    </ul>
+                </li>
+                <li data-category="food">
+                    <a href="/">
+                        <i class="fas fa-pizza-slice"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about food</a></li>
+                    </ul>
+                </li>
+                <li data-category="money">
+                    <a href="/">
+                        <i class="fas fa-search-dollar"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about money</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/">
+                        <i class="fas fa-flask"></i>
+                        <!-- <span data-hidden="true" class=" science"> Facts about science</span> -->
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about science</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/">
+                        <i class="fas fa-volleyball-ball"></i>
+                        <!-- <span data-hidden="true" class=" sport"> Facts about sport</span> -->
+                    </a>
+                    <ul>
+                        <li><a href="/"> Facts about sport</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main>
+            <div class="box">
+                <a href=""><img src="./images/face-round.png" alt="" /></a>
+            </div>
+        </main>
+        <blockquote><p class="joke"></p></blockquote>
+        <script src="./app.js"></script>
+    </body>
 </html>
