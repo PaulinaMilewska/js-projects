@@ -52,4 +52,22 @@ hiddenInfo.forEach((info, index) => {
     info.classList.add('hidden');
 });
 
-const categories = document.querySelectorAll('.categories li');
+const categoriesBtn = document.querySelectorAll('.categories li');
+const container = document.querySelectorAll('.container');
+
+categoriesBtn.forEach((category, index) => {
+    category.addEventListener('click', (event) => {
+        event.preventDefault();
+        let data = '';
+        const pathArr = event.path;
+        // FOREACH NOT TOLERATE break;
+        for (const el of pathArr) {
+            if (el.dataset.category != undefined) {
+                data = el.dataset.category;
+                console.log(data);
+                break;
+            }
+        }
+        // joke.innerHTML = `<h1>${data}</h1>`;
+    });
+});
