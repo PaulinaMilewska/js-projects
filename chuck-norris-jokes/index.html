@@ -15,6 +15,14 @@
         <h1>Chuck Norris fact</h1>
         <nav>
             <ul class="categories">
+                <li data-category="home" class="home">
+                    <a href="/">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/"> All facts</a></li>
+                    </ul>
+                </li>
                 <li data-category="animal">
                     <a href="/">
                         <i class="fas fa-paw"></i>
@@ -86,11 +94,12 @@
         <div class="container">
             <main>
                 <div class="box">
-                    <a href=""><img src="./images/face-round.png" alt="" /></a>
+                    <a href=""><img src="./images/home.png" alt="" /></a>
                 </div>
             </main>
             <blockquote><p class="joke"></p></blockquote>
         </div>
+        <div class="categoryContainer display-none"></div>
         <script src="./app.js"></script>
     </body>
 </html>

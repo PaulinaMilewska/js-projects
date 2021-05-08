@@ -44,6 +44,19 @@ function getJokesByQuery(query) {
 
 // getJokesByQuery("dog");
 
+let categoryJoke = '';
+function getJokesByCategory(category) {
+    fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+        .then((res) => res.json())
+        // .then((data) => console.log(data.value))
+        .then((data) => data.value)
+        .then((apiCatJoke) => (categoryJoke = apiCatJoke))
+        .then(() => {
+            renderJoke(categoryJoke);
+        })
+        .catch((rej) => console.log(rej.message));
+}
+
 chuckBtn.addEventListener('click', printJoke());
 
 const hiddenInfo = document.querySelectorAll('[data-hidden]');
@@ -53,7 +66,10 @@ hiddenInfo.forEach((info, index) => {
 });
 
 const categoriesBtn = document.querySelectorAll('.categories li');
-const container = document.querySelectorAll('.container');
+const container = document.querySelector('.container');
+const categoryContainer = document.querySelector('.categoryContainer');
+const imageBtn = document.querySelector('.box img');
+// console.log(imageBtn.src);
 
 categoriesBtn.forEach((category, index) => {
     category.addEventListener('click', (event) => {
@@ -62,12 +78,26 @@ categoriesBtn.forEach((category, index) => {
         const pathArr = event.path;
         // FOREACH NOT TOLERATE break;
         for (const el of pathArr) {
-            if (el.dataset.category != undefined) {
+            if (el.dataset.category == 'home') {
+                data = el.dataset.category;
+                console.log('HOME');
+                printJoke();
+                break;
+            } else if (el.dataset.category != (undefined || null)) {
                 data = el.dataset.category;
                 console.log(data);
+                getJokesByCategory(data);
                 break;
             }
         }
-        // joke.innerHTML = `<h1>${data}</h1>`;
+        imageBtn.src = `./images/${data}.png`;
+
+        // container.classList.add('display-none');
+        // categoryContainer.classList.remove('display-none');
+        // const catJoke = getJokesByCategory(data);
+        // joke.innerHTML = `<p>${catJoke}</p>`;
+        // chuckBtn.addEventListener('click', getJokesByCategory(data));
+
+        // console.log(catJoke);
     });
 });
