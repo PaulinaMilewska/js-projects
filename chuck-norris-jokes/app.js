@@ -33,16 +33,55 @@ function getCategories() {
         .catch((rej) => console.log(rej.message));
 }
 
+const categoryContainer = document.querySelector('.categoryContainer');
+
+const renderQueryJoke = (jokes) => {
+    const html = jokes
+        .map((joke) => {
+            return `
+     <div class="joke-box">
+      <p>${joke.value}</p>
+     </div>
+     `;
+        })
+        .join('________________________');
+    categoryContainer.classList.remove('display-none');
+    categoryContainer.innerHTML = html;
+};
+
+const form = document.querySelector('form');
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    let searchQuery = form.search.value;
+    getJokesByQuery(searchQuery);
+});
+
 // getCategories();
+let queryArray = [];
 
 function getJokesByQuery(query) {
     fetch(`https://api.chucknorris.io/jokes/search?query=${query}`)
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            // console.log(data.result);
+            return data.result;
+        })
+        .then((jokesFromApi) => {
+            queryArray = jokesFromApi;
+        })
+        .then(() => {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const searchQuery = form.search.value;
+                // renderQueryJoke()
+                const jokes = getJokesByQuery(searchQuery);
+                // console.log(jokes);
+            });
+            renderQueryJoke(queryArray);
+        })
         .catch((rej) => console.log(rej.message));
 }
-
-// getJokesByQuery("dog");
 
 let categoryJoke = '';
 function getJokesByCategory(category) {
@@ -88,7 +127,6 @@ hiddenInfo.forEach((info, index) => {
 });
 
 const container = document.querySelector('.container');
-const categoryContainer = document.querySelector('.categoryContainer');
 // console.log(imageBtn.src);
 
 categoriesBtn.forEach((category, index) => {
@@ -116,13 +154,5 @@ categoriesBtn.forEach((category, index) => {
             }
         }
         imageBtn.src = `./images/${data}.png`;
-
-        // container.classList.add('display-none');
-        // categoryContainer.classList.remove('display-none');
-        // const catJoke = getJokesByCategory(data);
-        // joke.innerHTML = `<p>${catJoke}</p>`;
-        // chuckBtn.addEventListener('click', getJokesByCategory(data));
-
-        // console.log(catJoke);
     });
 });
