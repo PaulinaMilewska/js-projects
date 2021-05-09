@@ -57,7 +57,29 @@ function getJokesByCategory(category) {
         .catch((rej) => console.log(rej.message));
 }
 
-chuckBtn.addEventListener('click', printJoke());
+const categoriesBtn = document.querySelectorAll('.categories li');
+const imageBtn = document.querySelector('.box img');
+
+chuckBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    imageBtn.classList.add('push');
+    categoriesBtn.forEach((el, index) => {
+        if (el.dataset.select == 'true') {
+            console.log('111');
+            if (el.dataset.category == 'home') {
+                console.log('222');
+                printJoke();
+            } else {
+                console.log('333');
+                let cate = el.dataset.category;
+                getJokesByCategory(cate);
+            }
+        }
+    });
+    setTimeout(() => {
+        imageBtn.classList.remove('push');
+    }, 500);
+});
 
 const hiddenInfo = document.querySelectorAll('[data-hidden]');
 
@@ -65,25 +87,28 @@ hiddenInfo.forEach((info, index) => {
     info.classList.add('hidden');
 });
 
-const categoriesBtn = document.querySelectorAll('.categories li');
 const container = document.querySelector('.container');
 const categoryContainer = document.querySelector('.categoryContainer');
-const imageBtn = document.querySelector('.box img');
 // console.log(imageBtn.src);
 
 categoriesBtn.forEach((category, index) => {
     category.addEventListener('click', (event) => {
         event.preventDefault();
+        categoriesBtn.forEach((cat) => {
+            cat.setAttribute('data-select', 'false');
+        });
         let data = '';
         const pathArr = event.path;
         // FOREACH NOT TOLERATE break;
         for (const el of pathArr) {
             if (el.dataset.category == 'home') {
+                el.setAttribute('data-select', 'true');
                 data = el.dataset.category;
                 console.log('HOME');
                 printJoke();
                 break;
             } else if (el.dataset.category != (undefined || null)) {
+                el.setAttribute('data-select', 'true');
                 data = el.dataset.category;
                 console.log(data);
                 getJokesByCategory(data);

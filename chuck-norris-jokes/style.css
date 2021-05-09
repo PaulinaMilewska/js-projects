@@ -50,6 +50,7 @@ blockquote::before {
         rgb(33 38 73 / 40%) -8px -8px 12px 0px;
     overflow: hidden;
     background-color: rgb(133, 131, 131);
+    /* background-color: black; */
 }
 
 .box img {
@@ -123,8 +124,10 @@ nav li:hover > ul {
     display: none;
 }
 
-.home {
-    background-color: rgb(55, 55, 55);
+.home a {
+    /* background-color: blue; */
+    color: rgb(252, 209, 241);
+    font-weight: 600;
 }
 
 .categoryContainer {
@@ -132,4 +135,24 @@ nav li:hover > ul {
     height: 500px;
     background-color: black;
     color: yellow;
+}
+
+li[data-select='true'] {
+    background-color: rgb(55, 55, 55);
+}
+.selected {
+    background-color: yellow;
+}
+
+.push {
+    animation: pulse 0.5s linear 1;
+}
+
+@keyframes pulse {
+    25% {
+        transform: scale(1.1);
+    }
+    75% {
+        transform: scale(1);
+    }
 }
