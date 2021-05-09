@@ -1,4 +1,5 @@
 const joke = document.querySelector('.joke');
+const container = document.querySelector('.container');
 
 function getRandomJoke() {
     return fetch('https://api.chucknorris.io/jokes/random')
@@ -44,7 +45,7 @@ const renderQueryJoke = (jokes) => {
      </div>
      `;
         })
-        .join('________________________');
+        .join('');
     categoryContainer.classList.remove('display-none');
     categoryContainer.innerHTML = html;
 };
@@ -54,11 +55,11 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     let searchQuery = form.search.value;
     getJokesByQuery(searchQuery);
+    form.search.value = '';
 });
 
 // getCategories();
 let queryArray = [];
-
 function getJokesByQuery(query) {
     fetch(`https://api.chucknorris.io/jokes/search?query=${query}`)
         .then((res) => res.json())
@@ -70,14 +71,7 @@ function getJokesByQuery(query) {
             queryArray = jokesFromApi;
         })
         .then(() => {
-            const form = document.querySelector('form');
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const searchQuery = form.search.value;
-                // renderQueryJoke()
-                const jokes = getJokesByQuery(searchQuery);
-                // console.log(jokes);
-            });
+            container.classList.add('display-none');
             renderQueryJoke(queryArray);
         })
         .catch((rej) => console.log(rej.message));
@@ -104,12 +98,9 @@ chuckBtn.addEventListener('click', (event) => {
     imageBtn.classList.add('push');
     categoriesBtn.forEach((el, index) => {
         if (el.dataset.select == 'true') {
-            console.log('111');
             if (el.dataset.category == 'home') {
-                console.log('222');
                 printJoke();
             } else {
-                console.log('333');
                 let cate = el.dataset.category;
                 getJokesByCategory(cate);
             }
@@ -126,12 +117,11 @@ hiddenInfo.forEach((info, index) => {
     info.classList.add('hidden');
 });
 
-const container = document.querySelector('.container');
-// console.log(imageBtn.src);
-
 categoriesBtn.forEach((category, index) => {
     category.addEventListener('click', (event) => {
         event.preventDefault();
+        categoryContainer.classList.add('display-none');
+        container.classList.remove('display-none');
         categoriesBtn.forEach((cat) => {
             cat.setAttribute('data-select', 'false');
         });
