@@ -42,7 +42,7 @@ blockquote::before {
     width: 300px;
     height: 300px;
     position: absolute;
-    top: 30vh;
+    top: 250px;
     left: 50vw;
     transform: translate(-50%, -50%);
     border-radius: 50%;
@@ -195,4 +195,29 @@ button {
 
 input#search {
     border-radius: 4px;
+}
+
+@media all and (max-width: 480px) {
+    form {
+        top: 40px;
+        /* left: 10px; */
+        right: 10px;
+    }
+    .box {
+        width: 250px;
+        height: 250px;
+        left: 42vw;
+    }
+    .joke {
+        max-width: 90%;
+    }
+    blockquote::before {
+        color: #727374;
+        top: 0.15em;
+        left: -8vw;
+    }
+    .categoryContainer {
+        left: 40vw;
+        width: 65vw;
+    }
 }
