@@ -1,57 +1,56 @@
-$base-color: #932E4A;
-$grey: #EDE6E6;
+$base-color: #932e4a;
+$grey: #ede6e6;
 
-.none{
+.none {
     display: none;
 }
 
-li, input{
+li,
+input {
     cursor: pointer;
 }
 
-
-.active{
+.active {
     color: green;
     // font-weight: 600;
     display: inline-flex !important;
 }
-body{
+body {
     background-color: $base-color;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
 p {
-    margin: 16px 0 0 30px;
+    margin-top: 16px;
 }
 
 .logo {
     opacity: 0.5;
 }
 
-.container{
+.container {
     color: $base-color;
     min-height: 1000px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
-    grid-template-areas: 
-    "search gallery";
+    grid-template-areas: 'search gallery';
 }
 
-.header{
+.header {
     & ul {
         display: flex;
     }
-    & li img{
+    & li img {
         width: 50px;
     }
-    & .title{
+    & .title {
         font-size: 29px;
         font-weight: 600;
         margin: 21px 0 0 8px;
@@ -59,7 +58,7 @@ p {
         color: $grey;
         opacity: 0.5;
     }
-    & .title{
+    & .title {
         font-size: 29px;
         font-weight: 600;
         margin: 21px 0 0 8px;
@@ -67,14 +66,14 @@ p {
         color: $grey;
         opacity: 0.5;
     }
-    &.logo{
+    &.logo {
         margin: 12px 0 0 37px;
         color: $grey;
         opacity: 0.5;
     }
 }
 
-.gallery{
+.gallery {
     grid-area: gallery;
 }
 
@@ -94,51 +93,51 @@ p.description {
     grid-gap: 10px;
     color: black;
     width: 300px;
-    margin-left: 31px;    
-    & .dog-image{
+    margin-left: 31px;
+    & .dog-image {
         width: 250px;
         height: 386px;
         border-radius: 22px;
-        }
-    & .dog-star{
+    }
+    & .dog-star {
         width: 16px;
         filter: invert(1);
     }
-  }
+}
 
-  .dog-box{
-      width: 20vw;
-      margin-bottom: 25px;
-      & ul{
+.dog-box {
+    width: 20vw;
+    margin-bottom: 25px;
+    & ul {
         display: flex;
-        }
-        & li{
-            padding: 15px;
-        }
-        &__star {
-            margin: 3px 0 0 40px;
-            background-color: $base-color;
-            color: white;
-            padding: 0 10px;
-            border-radius: 10px;
-        }
-        &__content {
-            background-color: white;
-            border-radius: 20px;
-            width: 250px;
-            height: 165px;
-            margin: -125px 0 0 0px;
-            z-index: 1;
-            position: relative;
-            background-color: white;
-            border-radius: 20px;
-            & p{
-                font-size: 13px;
-            }
     }
-  }
+    & li {
+        padding: 15px;
+    }
+    &__star {
+        margin: 3px 0 0 40px;
+        background-color: $base-color;
+        color: white;
+        padding: 0 10px;
+        border-radius: 10px;
+    }
+    &__content {
+        background-color: white;
+        border-radius: 20px;
+        width: 250px;
+        height: 165px;
+        margin: -125px 0 0 0px;
+        z-index: 1;
+        position: relative;
+        background-color: white;
+        border-radius: 20px;
+        & p {
+            font-size: 13px;
+        }
+    }
+}
 
-.search{
+.search {
     grid-area: search;
     background-color: lightgray;
     width: 333px;
@@ -156,65 +155,64 @@ p.description {
         display: flex;
         flex-direction: column;
     }
-    &__stars > p{
+    &__stars > p {
         margin: 26px 0 0 32px;
     }
-    & .search__male{
-        & .search__ul{
+    & .search__male {
+        & .search__ul {
             display: flex;
             flex-direction: row;
             margin-left: 0px;
             padding: 0;
         }
-        & li{
+        & li {
             display: inline-flex !important;
-            & img{
+            & img {
                 width: 22px;
                 margin: -12px 0px 0 32px;
             }
-            & p{
+            & p {
                 margin: -5px 7px 0 6px;
             }
         }
     }
-    & .search__stars{
-        & ul{
+    & .search__stars {
+        & ul {
             display: flex;
-             margin-left: -18px;
+            margin-left: -18px;
         }
-        & li{
+        & li {
             display: flex;
             border: 1px solid $base-color;
             margin: 0px 4px 0px 10px;
             padding: 0 5px;
             border-radius: 10px;
-            & p{
+            & p {
                 margin: 2px 7px 0 6px;
                 font-size: 16px;
             }
-            & img{
+            & img {
                 width: 10px;
             }
         }
     }
     &.range-slider {
         margin: 23px 0 0 17px;
-    }    
+    }
 }
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .box {
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 10px;
     }
-    .container{
+    .container {
         min-height: 1000px;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;
-        grid-template-areas: 
-        "search" "gallery";
+        grid-template-areas: 'search' 'gallery';
         align-items: center;
         justify-items: center;
     }
@@ -223,97 +221,136 @@ p.description {
         width: 100%;
         display: flex;
         align-items: center;
+        height: auto;
+    }
+    section.range-slider {
+        height: 100px !important;
     }
     .gallery {
         margin-top: 30px;
     }
+    .dog-box {
+        width: 80vw;
+    }
+}
 
-  }
-
-@mixin range-slider($width, $height, $input-top, $input-bg-color, $input-thumb-color, $float:none, $input-height:20px, $input-border-radius:14px) {
+@mixin range-slider(
+    $width,
+    $height,
+    $input-top,
+    $input-bg-color,
+    $input-thumb-color,
+    $float: none,
+    $input-height: 20px,
+    $input-border-radius: 14px
+) {
     position: relative;
     width: $width;
     height: $height;
     float: $float;
     text-align: center;
-      
-    input[type="range"] {
-      pointer-events: none;
-      position: absolute;
-      -webkit-appearance: none;
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);    
-      border: none;
-      border-radius: $input-border-radius;
-      background: $input-bg-color;
-      box-shadow: inset 0 1px 0 0 darken($input-bg-color,15%), inset 0 -1px 0 0 darken($input-bg-color,10%);
-      -webkit-box-shadow: inset 0 1px 0 0 darken($input-bg-color,15%), inset 0 -1px 0 0 darken($input-bg-color,10%);
-      overflow: hidden;
-      left: 0;
-      top: $input-top;
-      width: $width;
-      outline: none;
-      height: $input-height;
-      margin: 0;
-      padding: 0;
-    }  
-    
-    input[type="range"]::-webkit-slider-thumb {
-      pointer-events: all;
-      position: relative;
-      z-index: 1;
-      outline: 0;    
-      -webkit-appearance: none;
-      width: $input-height;
-      height: $input-height;
-      border: none;
-      border-radius: $input-border-radius;
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, lighten($input-thumb-color,60%)), color-stop(100%, $input-thumb-color));
-      background-image: -webkit-linear-gradient(top , lighten($input-thumb-color,60%) 0, $input-thumb-color 100%);
-      background-image: linear-gradient(to bottom, lighten($input-thumb-color,60%) 0, $input-thumb-color 100%); 
+
+    input[type='range'] {
+        pointer-events: none;
+        position: absolute;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        border: none;
+        border-radius: $input-border-radius;
+        background: $input-bg-color;
+        box-shadow: inset 0 1px 0 0 darken($input-bg-color, 15%),
+            inset 0 -1px 0 0 darken($input-bg-color, 10%);
+        -webkit-box-shadow: inset 0 1px 0 0 darken($input-bg-color, 15%),
+            inset 0 -1px 0 0 darken($input-bg-color, 10%);
+        overflow: hidden;
+        left: 0;
+        top: $input-top;
+        width: $width;
+        outline: none;
+        height: $input-height;
+        margin: 0;
+        padding: 0;
     }
-    
-    input[type="range"]::-moz-range-thumb {
-      pointer-events: all;
-      position: relative;
-      z-index: 10;
-      -moz-appearance: none;
-      width: $input-height;
-      height: $input-height;
-      border: none;
-      border-radius: $input-border-radius;
-      background-image: linear-gradient(to bottom, lighten($input-thumb-color,60%) 0, $input-thumb-color 100%); /* W3C */
+
+    input[type='range']::-webkit-slider-thumb {
+        pointer-events: all;
+        position: relative;
+        z-index: 1;
+        outline: 0;
+        -webkit-appearance: none;
+        width: $input-height;
+        height: $input-height;
+        border: none;
+        border-radius: $input-border-radius;
+        background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0%, lighten($input-thumb-color, 60%)),
+            color-stop(100%, $input-thumb-color)
+        );
+        background-image: -webkit-linear-gradient(
+            top,
+            lighten($input-thumb-color, 60%) 0,
+            $input-thumb-color 100%
+        );
+        background-image: linear-gradient(
+            to bottom,
+            lighten($input-thumb-color, 60%) 0,
+            $input-thumb-color 100%
+        );
     }
-  
-    input[type="range"]::-ms-thumb {
-      pointer-events: all;
-      position: relative;
-      z-index: 10;
-      -ms-appearance: none;
-      width: $input-height;
-      height: $input-height;
-      border-radius: $input-border-radius;
-      border: 0;
-      background-image: linear-gradient(to bottom, lighten($input-thumb-color,60%) 0, $input-thumb-color 100%); /* W3C */
+
+    input[type='range']::-moz-range-thumb {
+        pointer-events: all;
+        position: relative;
+        z-index: 10;
+        -moz-appearance: none;
+        width: $input-height;
+        height: $input-height;
+        border: none;
+        border-radius: $input-border-radius;
+        background-image: linear-gradient(
+            to bottom,
+            lighten($input-thumb-color, 60%) 0,
+            $input-thumb-color 100%
+        ); /* W3C */
     }
-    
-    input[type=range]::-moz-range-track {
-      position: relative;
-      z-index: -1;
-      background-color: rgba(0, 0, 0, 1);
-      border: 0;
+
+    input[type='range']::-ms-thumb {
+        pointer-events: all;
+        position: relative;
+        z-index: 10;
+        -ms-appearance: none;
+        width: $input-height;
+        height: $input-height;
+        border-radius: $input-border-radius;
+        border: 0;
+        background-image: linear-gradient(
+            to bottom,
+            lighten($input-thumb-color, 60%) 0,
+            $input-thumb-color 100%
+        ); /* W3C */
     }
-    
-    input[type=range]:last-of-type::-moz-range-track {
-      -moz-appearance: none;
-      background: none transparent;
-      border: 0;
-    } 
-    
-    input[type=range]::-moz-focus-outer {
-      border: 0;
+
+    input[type='range']::-moz-range-track {
+        position: relative;
+        z-index: -1;
+        background-color: rgba(0, 0, 0, 1);
+        border: 0;
     }
-  }
-  
-  section.range-slider {
-    @include range-slider(300px, 300px, 50px, #F1EFEF, #413F41, left);
-  }
+
+    input[type='range']:last-of-type::-moz-range-track {
+        -moz-appearance: none;
+        background: none transparent;
+        border: 0;
+    }
+
+    input[type='range']::-moz-focus-outer {
+        border: 0;
+    }
+}
+
+section.range-slider {
+    @include range-slider(300px, 300px, 50px, #f1efef, #413f41, left);
+}
