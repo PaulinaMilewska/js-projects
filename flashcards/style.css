@@ -189,7 +189,20 @@ a:hover {
     text-transform: uppercase;
 }
 
+@media all and (min-width: 480px) and (max-width: 1000px) {
+    .container {
+        margin-top: 30px;
+    }
+    .right,
+    .left {
+        top: 255px;
+    }
+}
+
 @media all and (max-width: 480px) {
+    .card__face--back {
+        font-size: 16px;
+    }
     .navigation li {
         flex-basis: 100%;
     }
@@ -200,9 +213,17 @@ a:hover {
 
     .container {
         width: 90%;
-        margin: auto;
+        margin: 65px auto auto auto;
         height: 50%;
         padding-bottom: 10px;
+    }
+    .right {
+        top: 430px;
+        right: 40px;
+    }
+    .left {
+        top: 430px;
+        left: 40px;
     }
     .scene {
         margin: 0;
