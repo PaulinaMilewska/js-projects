@@ -10,7 +10,11 @@ body {
 
 h1 {
     color: white;
-    margin: auto 10px;
+    margin: 15px;
+}
+
+form {
+    margin-top: 15px;
 }
 
 .joke {
@@ -22,13 +26,13 @@ h1 {
 
 blockquote {
     position: relative;
-    font-family: 'Verdana', serif;
+    font-family: "Verdana", serif;
     font-size: 2.4em;
     line-height: 1.5em;
 }
 
 blockquote::before {
-    content: '\201c';
+    content: "\201c";
     position: absolute;
     top: 0.4em;
     left: 13vw;
@@ -46,8 +50,7 @@ blockquote::before {
     left: 50vw;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    box-shadow: rgb(16 15 15) 12px 12px 16px 0px,
-        rgb(33 38 73 / 40%) -8px -8px 12px 0px;
+    box-shadow: rgb(16 15 15) 12px 12px 16px 0px, rgb(33 38 73 / 40%) -8px -8px 12px 0px;
     overflow: hidden;
     background-color: rgb(133, 131, 131);
     text-align: center;
@@ -60,7 +63,7 @@ blockquote::before {
 }
 
 .box::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -150px;
@@ -145,7 +148,7 @@ nav li:hover > ul {
     border-radius: 5px;
 }
 
-li[data-select='true'] {
+li[data-select="true"] {
     background-color: rgb(55, 55, 55);
 }
 .selected {
@@ -219,5 +222,18 @@ input#search {
     .categoryContainer {
         left: 40vw;
         width: 65vw;
+    }
+    h1 {
+        display: flex;
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    h1 span {
+        margin-left: 5px;
+    }
+
+    form {
+        margin-right: 15%;
     }
 }
